@@ -1,0 +1,19 @@
+name: hermes-decisions
+version: 1.0.0
+manifest_version: 2
+api_version: 1
+description: Fast, zero-output-token Gemini Decisions API (gemini-decision-1) tool for noul, choice, and score decisions over text, JSON, images, PDFs, audio, and video.
+license: MIT
+tags:
+  - gemini
+  - decisions-api
+  - classification
+  - routing
+  - multimodal
+provides_tools:
+  - gemini_decide
+requires_env:
+  - GEMINI_API_KEY
+python_dependencies:
+  - "google-genai>=3.2.0,<4"
+  - "certifi>=2024.0.0,<2028"
