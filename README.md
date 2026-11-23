@@ -6,17 +6,34 @@ Exposes the `gemini_decide` tool so Hermes (and other `SKILL.md`-compatible harn
 
 ## Quick Onboarding
 
-Run the interactive onboarding script:
+Install the plugin via the Hermes CLI:
 
 ```bash
-python3 onboard.py
+hermes plugins install hermes-decisions
 ```
 
-The onboarding CLI will:
-1. Prompt for your `GEMINI_API_KEY` (from [Google AI Studio](https://aistudio.google.com/docs/api-key)) and save it to `~/.hermes/.env`.
-2. Install the native plugin into `~/.hermes/plugins/hermes-decisions/`.
-3. Install `SKILL.md` into `~/.hermes/skills/gemini-decisions/SKILL.md` (and optionally `~/.claude/skills/` and `~/.codex/skills/`).
-4. Enable `hermes-decisions` via `hermes plugins enable hermes-decisions` and optionally run a live verification check.
+Then set your API key and enable the plugin:
+
+```bash
+hermes config set GEMINI_API_KEY <your-key-from-google-ai-studio>
+hermes plugins enable hermes-decisions
+```
+
+Get a free key at: https://aistudio.google.com/docs/api-key
+
+### Optional: Install the skill for Claude Code / Codex
+
+The bundled skill can also be installed for other harnesses:
+
+```bash
+# For Claude Code
+mkdir -p ~/.claude/skills/gemini-decisions
+cp skills/gemini-decisions/SKILL.md ~/.claude/skills/gemini-decisions/
+
+# For Codex
+mkdir -p ~/.codex/skills/gemini-decisions
+cp skills/gemini-decisions/SKILL.md ~/.codex/skills/gemini-decisions/
+```
 
 ## Tool Usage (`gemini_decide`)
 

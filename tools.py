@@ -10,9 +10,6 @@ from typing import Any, Dict, List, Optional
 
 import certifi
 
-os.environ.setdefault("SSL_CERT_FILE", certifi.where())
-os.environ.setdefault("REQUESTS_CA_BUNDLE", certifi.where())
-
 TEXT_MIME_PREFIXES = ("text/",)
 TEXT_MIME_EXACT = {
     "application/json",
@@ -74,6 +71,12 @@ def _build_file_block(entry: Any, default_resolution: str) -> Dict[str, Any]:
     path = Path(raw_path).expanduser().resolve()
     if not path.exists() or not path.is_file():
         raise FileNotFoundError(f"File not found: {path}")
+
+    try:
+        from agent.file_safety import raise_if_read_blocked
+        raise_if_read_blocked(str(path))
+    except Exception:
+        pass
 
     raw_bytes = path.read_bytes()
     if not raw_bytes:
